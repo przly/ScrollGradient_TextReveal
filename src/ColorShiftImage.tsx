@@ -34,10 +34,7 @@ export function ColorShiftImage({
     offset: ["start end", "10vh"],
   })
 
-  // Negative scaleY both mirrors the image vertically and drives the reveal,
-  // so the same source image works for the reverse (bottom) section without
-  // a separately pre-flipped asset.
-  const [from, to] = reverse ? [0, -2.5] : [3, 0]
+  const [from, to] = reverse ? [0, 2.5] : [3, 0]
 
   const scaleY = useTransform(scrollYProgress, (progress) => {
     return from + (to - from) * easeInOutCubic(progress)
@@ -56,25 +53,33 @@ export function ColorShiftImage({
     >
       <div style={{ height: "102%", position: "relative" }}>
         <div style={{ width: "100%", height: "100%", position: "sticky", top: 0 }}>
-          <motion.img
-            src={src}
-            srcSet={srcSet}
-            sizes={srcSet ? sizes : undefined}
-            alt={alt}
-            loading={loading}
+          <motion.div
             style={{
               scaleY,
               willChange,
               transformOrigin: reverse ? "bottom center" : "top center",
-              width: "110%",
-              maxWidth: "110%",
+              width: "100%",
               height: "100%",
-              marginLeft: "-5%",
-              marginTop: "-5px",
-              marginBottom: "-5px",
-              display: "block",
             }}
-          />
+          >
+            <img
+              src={src}
+              srcSet={srcSet}
+              sizes={srcSet ? sizes : undefined}
+              alt={alt}
+              loading={loading}
+              style={{
+                transform: reverse ? "scaleY(-1)" : undefined,
+                width: "110%",
+                maxWidth: "110%",
+                height: "100%",
+                marginLeft: "-5%",
+                marginTop: "-5px",
+                marginBottom: "-5px",
+                display: "block",
+              }}
+            />
+          </motion.div>
         </div>
       </div>
     </section>
