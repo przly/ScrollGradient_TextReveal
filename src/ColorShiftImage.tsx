@@ -34,7 +34,10 @@ export function ColorShiftImage({
     offset: ["start end", "10vh"],
   })
 
-  const [from, to] = reverse ? [0, 2.5] : [3, 0]
+  // Negative scaleY both mirrors the image vertically and drives the reveal,
+  // so the same source image works for the reverse (bottom) section without
+  // a separately pre-flipped asset.
+  const [from, to] = reverse ? [0, -2.5] : [3, 0]
 
   const scaleY = useTransform(scrollYProgress, (progress) => {
     return from + (to - from) * easeInOutCubic(progress)

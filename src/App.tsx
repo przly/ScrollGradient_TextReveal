@@ -1,7 +1,6 @@
 import { ColorShiftImage } from "./ColorShiftImage"
 import { IntroText } from "./IntroText"
 import gradientImage from "./assets/GradientTransparent2.webp"
-import bottomGradientImage from "./assets/GradientTransparent2Flipped.webp"
 
 const spacerStyle = {
   height: "100vh",
@@ -28,7 +27,7 @@ function App() {
 
       <IntroText />
 
-      <ColorShiftImage reverse src={bottomGradientImage} />
+      <ColorShiftImage reverse src={gradientImage} />
 
       <div style={topSpacerStyle}>End of demo</div>
     </>
