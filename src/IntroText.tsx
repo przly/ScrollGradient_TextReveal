@@ -4,9 +4,11 @@ import ellipse4 from "./assets/ellipse-4.svg"
 const containerStyle = {
   display: "flex",
   flexDirection: "column" as const,
-  gap: 32,
   alignItems: "flex-start",
-  padding: "256px 24px",
+  paddingTop: 256,
+  paddingBottom: 100,
+  paddingLeft: 24,
+  paddingRight: 24,
   textAlign: "left" as const,
 }
 
@@ -14,6 +16,7 @@ const labelRowStyle = {
   display: "flex",
   gap: 24,
   alignItems: "center",
+  marginBottom: 32,
 }
 
 const labelTextStyle = {
@@ -27,6 +30,19 @@ const labelTextStyle = {
   whiteSpace: "nowrap" as const,
 }
 
+const cardsRowStyle = {
+  display: "flex",
+  gap: 16,
+  width: "100%",
+}
+
+const cardStyle = {
+  flex: 1,
+  aspectRatio: "4 / 3",
+  borderRadius: 16,
+  background: "#e5e5e5",
+}
+
 const headlineStyle = {
   display: "flex",
   flexWrap: "wrap" as const,
@@ -37,7 +53,7 @@ const headlineStyle = {
   lineHeight: 1,
   letterSpacing: "-2.88px",
   color: "#041c2c",
-  margin: 0,
+  margin: "0 0 160px 0",
   width: "100%",
 }
 
@@ -111,6 +127,11 @@ export function IntroText() {
           </span>
         ))}
       </motion.p>
+      <div style={cardsRowStyle}>
+        <div style={cardStyle} />
+        <div style={cardStyle} />
+        <div style={cardStyle} />
+      </div>
     </div>
   )
 }

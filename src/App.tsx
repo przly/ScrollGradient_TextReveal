@@ -1,5 +1,7 @@
+import { useRef } from "react"
 import { ColorShiftImage } from "./ColorShiftImage"
 import { IntroText } from "./IntroText"
+import { ScrollProgress } from "./ScrollProgress"
 import gradientImage from "./assets/GradientTransparent2.webp"
 
 const spacerStyle = {
@@ -19,17 +21,31 @@ const topSpacerStyle = {
 }
 
 function App() {
+  const topRef = useRef<HTMLElement>(null)
+  const bottomRef = useRef<HTMLElement>(null)
+  const footerRef = useRef<HTMLElement>(null)
+
   return (
     <>
+      <ScrollProgress topRef={topRef} bottomRef={footerRef} />
+
       <div style={topSpacerStyle}>Scroll down ↓</div>
 
-      <ColorShiftImage src={gradientImage} />
+      <ColorShiftImage sectionRef={topRef} src={gradientImage} />
 
       <IntroText />
 
-      <ColorShiftImage reverse src={gradientImage} />
+      <ColorShiftImage
+        reverse
+        sectionRef={bottomRef}
+        progressTarget={footerRef}
+        offset={["start 150%", "start start"]}
+        src={gradientImage}
+      />
 
-      <div style={topSpacerStyle}>End of demo</div>
+      <section ref={footerRef} style={topSpacerStyle}>
+        End of demo
+      </section>
     </>
   )
 }

@@ -1,5 +1,6 @@
-import { useRef } from "react"
+import type { RefObject } from "react"
 import { motion, useScroll, useTransform, useWillChange } from "motion/react"
+import type { UseScrollOptions } from "motion/react"
 
 // Mirrors GSAP's power3.inOut easing curve.
 function easeInOutCubic(t: number) {
@@ -16,6 +17,15 @@ interface ColorShiftImageProps {
   loading?: "lazy" | "eager"
   /** Flips the wipe direction, matching the original's ".reverse" variant. */
   reverse?: boolean
+  /** Exposes the section element so a parent can track its own scroll progress. */
+  sectionRef: RefObject<HTMLElement | null>
+  /**
+   * Element whose entry into the viewport drives the animation, if different
+   * from the section itself (e.g. triggering off a later element coming into view).
+   */
+  progressTarget?: RefObject<HTMLElement | null>
+  /** Scroll offset for the trigger element. Defaults to spanning exactly one viewport height. */
+  offset?: UseScrollOptions["offset"]
 }
 
 export function ColorShiftImage({
@@ -25,13 +35,15 @@ export function ColorShiftImage({
   alt = "",
   loading = "lazy",
   reverse = false,
+  sectionRef,
+  progressTarget,
+  offset = ["start end", "start start"],
 }: ColorShiftImageProps) {
-  const sectionRef = useRef<HTMLElement>(null)
-
-  // Matches GSAP ScrollTrigger's start: "top bottom", end: "+=1.1 * viewport height"
+  // By default the animation spans exactly one viewport height of scroll:
+  // from the trigger element entering the bottom of the viewport to it reaching the top.
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "10vh"],
+    target: progressTarget ?? sectionRef,
+    offset,
   })
 
   const [from, to] = reverse ? [0, 2.5] : [3, 0]
