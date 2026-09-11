@@ -11,7 +11,7 @@ interface ScrollProgressProps {
 export function ScrollProgress({ topRef, bottomRef }: ScrollProgressProps) {
   const { scrollYProgress: topProgress } = useScroll({
     target: topRef,
-    offset: ["start end", "start start"],
+    offset: ["start end", "start -10%"],
   })
   const { scrollYProgress: bottomProgress } = useScroll({
     target: bottomRef,

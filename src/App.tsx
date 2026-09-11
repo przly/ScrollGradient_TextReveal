@@ -31,7 +31,11 @@ function App() {
 
       <div style={topSpacerStyle}>Scroll down ↓</div>
 
-      <ColorShiftImage sectionRef={topRef} src={gradientImage} />
+      <ColorShiftImage
+        sectionRef={topRef}
+        offset={["start end", "start -10%"]}
+        src={gradientImage}
+      />
 
       <IntroText />
 
