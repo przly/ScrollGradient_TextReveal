@@ -2,7 +2,7 @@ import { useRef } from "react"
 import { ColorShiftImage } from "./ColorShiftImage"
 import { IntroText } from "./IntroText"
 import { ScrollProgress } from "./ScrollProgress"
-import gradientImage from "./assets/GradientTransparent2.webp"
+import gradientImage from "./assets/GradientTransparent2_Compressed.webp"
 
 const spacerStyle = {
   height: "100vh",
